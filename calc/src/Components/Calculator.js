@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const Numbers = () => {
+export const Calculator = () => {
   const [calc, setCalc] = useState("");
   const [result, setResult] = useState("");
   const options = ["/", "*", "+", "-", "."];
@@ -12,6 +12,7 @@ export const Numbers = () => {
     ) {
       return;
     }
+
     setCalc(calc + value);
     if (!options.includes(value)) {
       setResult(eval(calc + value).toString());
@@ -39,23 +40,40 @@ export const Numbers = () => {
     const value = calc.slice(0, -1);
     setCalc(value);
   };
+  const deleteAll = () => {
+    setCalc("");
+    setResult("0");
+  };
   return (
     <div className="calculator">
       <div className="display">
-        <span>({result ? result : ""})</span> {calc || "0"}
+        {calc || "0"} <br />
+        <span className="result">({result ? result : ""})</span>
       </div>
-      <div className="operators">
-        <button onClick={() => updateCalc("/")}>/</button>
-        <button onClick={() => updateCalc("*")}>*</button>
-        <button onClick={() => updateCalc("+")}>+</button>
-        <button onClick={() => updateCalc("-")}>-</button>
-        <button onClick={deleteLast}>DEL</button>
+      <div>
+        <button className="delAll" onClick={deleteAll}>
+          C
+        </button>
+
+        <button className="del" onClick={deleteLast}>
+          DEL
+        </button>
       </div>
-      <div className="digits">
-        {createDigits()}
-        <button onClick={() => updateCalc("0")}>0</button>
-        <button onClick={() => updateCalc(".")}>.</button>
-        <button onClick={calculate}>=</button>
+
+      <div className="calculator__wrap">
+        <div className="digits">
+          {createDigits()}
+
+          <button onClick={() => updateCalc("0")}>0</button>
+          <button onClick={() => updateCalc(".")}>.</button>
+          <button onClick={calculate}>=</button>
+        </div>
+        <div className="operators">
+          <button onClick={() => updateCalc("/")}>/</button>
+          <button onClick={() => updateCalc("*")}>*</button>
+          <button onClick={() => updateCalc("+")}>+</button>
+          <button onClick={() => updateCalc("-")}>-</button>
+        </div>
       </div>
     </div>
   );
