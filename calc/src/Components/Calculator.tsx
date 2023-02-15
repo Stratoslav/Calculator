@@ -3,9 +3,9 @@ import React, { useState } from "react";
 export const Calculator = () => {
   const [calc, setCalc] = useState("");
   const [result, setResult] = useState("");
-  const options = ["/", "*", "+", "-", "."];
+  const options: string[] = ["/", "*", "+", "-", "."];
 
-  const updateCalc = (value) => {
+  const updateCalc = (value: string) => {
     if (
       (options.includes(value) && calc === "") ||
       (options.includes(value) && options.includes(calc.slice(-1)))
