@@ -12,6 +12,7 @@ export const Calculator = () => {
     ) {
       return;
     }
+    console.log('f')
 
     setCalc(calc + value);
     if (!options.includes(value)) {
